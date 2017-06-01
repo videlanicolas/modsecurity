@@ -5,9 +5,9 @@
 ### About
 Modsecurity + NGINX reverse proxy inside a Docker image, ready for a Kubernetes deploy. Modsecurity, aswell as upstream servers, are configured through environment variables. Rules can be either retrieved from a repository or configured locally by attacking a folder on the docker container. Personally I didn't liked mlogc as a logging method, that's why I developed molopa (Modsecurity Log Parser), but it's use is optional.
 ### To-Do
-	- [ ] Test latency and jitter.
-	- [ ] Add TLS proxy.
-	- [ ] Add ClamAV or external Antivirus.
+  - [ ] Test latency and jitter.
+  - [ ] Add TLS proxy.
+  - [ ] Add ClamAV or external Antivirus.
 ### Download docker image
 
 [Dockerhub](https://hub.docker.com/r/videlanicolas/modsecurity/)
