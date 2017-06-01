@@ -5,7 +5,7 @@ def create_config(nginx_location='/usr/local/nginx/conf/nginx.conf'):
 	proxylist = ''
 	for ip in re.split(',|;|\*| ',os.environ['NGINX_UPSTREAM_SERVERS']):
 		proxylist+='server {0};'.format(ip)
-	data = """
+		data = """
 user  {0};
 worker_processes  {1};
 daemon off;
@@ -33,7 +33,7 @@ http {{
 		proxy_pass http://upstream_servers;
 		proxy_read_timeout 180s;
         }}
-        error_page   500 502 503 504  /50x.html;
+        #error_page   500 502 503 504  /50x.html;
         location = /50x.html {{
             root   html;
         }}

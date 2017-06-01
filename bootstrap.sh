@@ -21,7 +21,6 @@ if env | grep -q ^REMOTE_CONFIG=; then
 	echo "Fetching configuration..."
 	fetch_modsecurity_configuration $REMOTE_CONFIG
 fi
-ln -s /etc/modsecurity/rules.d/*.conf /etc/modsecurity/rules/
 if env | grep -q ^REMOTE_CONFIG=; then
 	wget --output-document="/usr/local/nginx/html/bad.html" $WITH_BLOCK_PAGE
 fi
@@ -57,7 +56,8 @@ else
 fi
 sed -i "/^#SecUploadDir /s/^#*//" /usr/src/modsecurity/modsecurity.conf
 if env | grep -q ^MODSECURITY_DEBUG=; then
-	if [ $MODSECURITY_DEBUG -eq "On" ]; then
+	if [ "$MODSECURITY_DEBUG" == "On" ]; then
+		echo "Enabling ModSecurity debug log."
 		sed -i "/^#SecDebugLog /s/^#*//" /usr/src/modsecurity/modsecurity.conf
 		sed -i "/^#SecDebugLogLevel /s/^#*//" /usr/src/modsecurity/modsecurity.conf
 	fi

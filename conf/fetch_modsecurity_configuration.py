@@ -18,7 +18,7 @@ if __name__ == '__main__':
 				quit(1)
 			else:
 				print "Successfully feteched config file." 
-				with open('/etc/modsecurity/rules.d/{0}.conf'.format(str(i)),'w') as f:
+				with open('/etc/modsecurity/rules/{0}.conf'.format(str(i)),'w') as f:
 					f.write(a.text)
 	except Exception as e:
 		print "Error retrieving config files: {0}".format(str(e))
