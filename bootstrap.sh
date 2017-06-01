@@ -28,7 +28,7 @@ echo "Generating NGINX configuration..."
 nginxconf
 echo "Generating ModSecurity configuration..."
 if env | grep -q ^MODSECURITY_ENGINE=; then
-	if [ $WITH_MOLOPA -eq "Off" ]; then
+	if [ $MODSECURITY_ENGINE -eq "Off" ]; then
 		sed -i "/^SecRuleEngine /s/ .*/ DetectionOnly/" /usr/src/modsecurity/modsecurity.conf
 	else
 		sed -i "/^SecRuleEngine /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
