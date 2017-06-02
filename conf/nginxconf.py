@@ -9,6 +9,7 @@ def create_config(nginx_location='/usr/local/nginx/conf/nginx.conf'):
 user  {0};
 worker_processes  {1};
 daemon off;
+error_log /var/log/error.log debug;
 
 events {{
     worker_connections  {2};
@@ -28,12 +29,12 @@ http {{
         server_name  {4};
 
         location / {{
-	    ModSecurityEnabled on;
-		ModSecurityConfig /usr/src/modsecurity/modsecurity.conf;
+	    modsecurity on;
+	    modsecurity_rules_file /etc/modsecurity/modsecurity.conf;
 		proxy_pass http://upstream_servers;
 		proxy_read_timeout 180s;
         }}
-        #error_page   500 502 503 504  /50x.html;
+        error_page   500 502 503 504  /50x.html;
         location = /50x.html {{
             root   html;
         }}

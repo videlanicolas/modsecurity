@@ -29,37 +29,37 @@ nginxconf
 echo "Generating ModSecurity configuration..."
 if env | grep -q ^MODSECURITY_ENGINE=; then
 	if [ $MODSECURITY_ENGINE -eq "Off" ]; then
-		sed -i "/^SecRuleEngine /s/ .*/ DetectionOnly/" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^SecRuleEngine /s/ .*/ DetectionOnly/" /etc/modsecurity/modsecurity.conf
 	else
-		sed -i "/^SecRuleEngine /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^SecRuleEngine /s/ .*/ On/" /etc/modsecurity/modsecurity.conf
 	fi
 else
-	sed -i "/^SecRuleEngine /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
+	sed -i "/^SecRuleEngine /s/ .*/ On/" /etc/modsecurity/modsecurity.conf
 fi
 if env | grep -q ^MODSECURITY_PARSE_REQUEST_BODY=; then
 	if [ $MODSECURITY_PARSE_REQUEST_BODY -eq "Off" ]; then
-		sed -i "/^SecRequestBodyAccess /s/ .*/ Off/" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^SecRequestBodyAccess /s/ .*/ Off/" /etc/modsecurity/modsecurity.conf
 	else
-		sed -i "/^SecRequestBodyAccess /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^SecRequestBodyAccess /s/ .*/ On/" /etc/modsecurity/modsecurity.conf
 	fi
 else
-	sed -i "/^SecRequestBodyAccess /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
+	sed -i "/^SecRequestBodyAccess /s/ .*/ On/" /etc/modsecurity/modsecurity.conf
 fi
 if env | grep -q ^MODSECURITY_PARSE_RESPONSE_BODY=; then
 	if [ $MODSECURITY_PARSE_RESPONSE_BODY -eq "Off" ]; then
-		sed -i "/^SecResponseBodyAccess /s/ .*/ Off/" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^SecResponseBodyAccess /s/ .*/ Off/" /etc/modsecurity/modsecurity.conf
 	else
-		sed -i "/^SecResponseBodyAccess /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^SecResponseBodyAccess /s/ .*/ On/" /etc/modsecurity/modsecurity.conf
 	fi
 else
-	sed -i "/^SecResponseBodyAccess /s/ .*/ On/" /usr/src/modsecurity/modsecurity.conf
+	sed -i "/^SecResponseBodyAccess /s/ .*/ On/" /etc/modsecurity/modsecurity.conf
 fi
-sed -i "/^#SecUploadDir /s/^#*//" /usr/src/modsecurity/modsecurity.conf
+sed -i "/^#SecUploadDir /s/^#*//" /etc/modsecurity/modsecurity.conf
 if env | grep -q ^MODSECURITY_DEBUG=; then
 	if [ "$MODSECURITY_DEBUG" == "On" ]; then
 		echo "Enabling ModSecurity debug log."
-		sed -i "/^#SecDebugLog /s/^#*//" /usr/src/modsecurity/modsecurity.conf
-		sed -i "/^#SecDebugLogLevel /s/^#*//" /usr/src/modsecurity/modsecurity.conf
+		sed -i "/^#SecDebugLog /s/^#*//" /etc/modsecurity/modsecurity.conf
+		sed -i "/^#SecDebugLogLevel /s/^#*//" /etc/modsecurity/modsecurity.conf
 	fi
 fi
 echo "Running NGINX..."
